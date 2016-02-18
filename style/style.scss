@@ -1,0 +1,20 @@
+.userTemplate, .firstTable, .secondTable, .thirdTable, .fourthTable, .fifthTable, .sixthTable, .seventhTable, .eighthTable, 
+.ninthTable, .tenthTable, .eleventhTable, .twelfthTable, .thirteenthTable, .fourteenthTable, .fifthteenthTable {
+	width: 980px;
+	margin-bottom: 50px;
+}
+
+.userTemplate > table, .firstTable > table, .secondTable > table, .thirdTable > table, .fourthTable > table, .fifthTable > table, 
+.sixthTable > table, .seventhTable > table, .eighthTable > table, .ninthTable > table, .tenthTable > table, 
+.eleventhTable > table, .twelfthTable > table, .thirteenthTable > table, .fourteenthTable > table, .fifthteenthTable > table {
+	width: 100%;
+}
+
+.render-buttons {
+	width: 25%;
+	margin: 10px auto 0 auto;
+}
+
+.render-buttons > input {
+	margin-bottom: 5px;
+}

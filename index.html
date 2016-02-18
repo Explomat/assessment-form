@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			.color_head_table {
+				text-align: center;
+				background-color: #FFEBCD;
+			}
+			.color_head_table2 {
+				text-align: center;
+				background-color: #CAE3CA;
+			}
+			.color_head_table3 {
+				text-align: center;
+				background-color: #ECECFF;
+			}
+			.color_head_table4 {
+				text-align: center;
+				background-color: #F5F5D3;
+			}
+			.input_center {
+				text-align: center;
+			}
+			.color_text_fone_table {
+				background-color: #F3F3F3; text-align: center;
+			}
+			input { 
+				width: 95%;
+			}
+			textarea { 
+				width: 95%;
+			}
+			.color_head_date {
+				background-color: #FFEBCD; border-color: black;
+			}
+			.border_table_date {
+				border-collapse: collapse;
+				background-color: #FFEBCD;
+			}
+			.input_text_center { 
+				text-align:center;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="/assessment_form/build/style/style.min.css">
+		<script type="text/javascript" src="/assessment_form/build/jquery.min.js"></script>
+		<script type="text/javascript" src="/assessment_form/build/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/assessment_form/build/bundle.js"></script>
+		<script type="text/javascript">
+			function getUrlParams(url, param){
+				if (!url) return null;
+
+				var vars = {};
+			    url.replace( 
+					/[?&]+([^=&]+)=?([^&]*)?/gi,
+					function( m, key, value ) {
+						vars[key] = value !== undefined ? value : '';
+					}
+			    );
+
+			    if (param) return vars[param];
+			    return vars;
+			}
+
+			function sendForm(status) {
+				$('input[type="checkbox"]').each(function(){
+					var isChecked = $(this).is(':checked');
+					var name = $(this).attr('name');
+					if (!isChecked) {
+						$(this).parent().append('<input type="hidden" name="'+name+'" value="off">');
+					}
+				});
+
+				var form = document.getElementById('actionForm');
+				form.form_id.value = getUrlParams(window.parent.location.href, 'object_id');
+				form.action.value = status;
+				form.submit(); 
+			}
+		</script>
+	</head>
+	<body>
+		<FORM id="actionForm" action="/custom_web_template.html?object_id=6251547620930508696&server_id=6251548875239611649&action_name=saveData" 
+		method="post" enctype="multipart/form-data" style="background-color:#fff;">
+			<div id="render-forms"></div>
+			<div id="render-buttons" class="render-buttons"></div>
+
+			<input type="hidden" name="form_id" value="">
+			<input type="hidden" name="action" value="">
+		</FORM>
+	</body>
+</html>
+
