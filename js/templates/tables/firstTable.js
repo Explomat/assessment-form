@@ -20,7 +20,7 @@ module.exports = function (firstTable) {
 				</tr>\n\
 			</table>\n\
 			<br><br>\n\
-			<table style='width: 1000; border-spacing: 0px;' align='center' class='border_table_date'>\n\
+			<table border-spacing: 0px;' align='center' class='border_table_date'>\n\
 				<tr>\n\
 					<td style='height: 43px; padding-left:10px;' colspan='3' class='color_head_date'>\n\
 						ОЦЕНКА ЭФФЕКТИВНОСТИ ПО ИТОГАМ КОНТРОЛЬНОГО ПЕРИОДА\n\

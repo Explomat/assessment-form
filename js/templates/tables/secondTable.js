@@ -13,7 +13,7 @@ module.exports = function (secondTable) {
 					</td>\n\
 				</tr>\n\
 			</table>\n\
-			<table style='width: 1000; ' align='center' class='alltables'>\n\
+			<table align='center' class='alltables'>\n\
 				<tr class='color_head_table'>\n\
 					<td style='background-color: blanchedalmond; text-align:center; height: 43px' colspan='9'>\n\
 						<span class='textbold'>ОЦЕНКА ДОСТИЖЕНИЯ ФИНАНСОВЫХ KPI</span>\n\
