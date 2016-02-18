@@ -1,7 +1,9 @@
+var moment = require('moment');
+
 module.exports = function (firstTable) {
 	firstTable = firstTable || {};
-	var startDate = firstTable.col0_str0 ? $.datepicker.formatDate('dd.mm.yy', new Date(firstTable.col0_str0)) : '';
-	var finishDate = firstTable.col0_str1 ? $.datepicker.formatDate('dd.mm.yy', new Date(firstTable.col0_str1)) : '';
+	var startDate = moment(firstTable.col0_str0).format('DD.MM.YYYY');
+	var finishDate = moment(firstTable.col0_str1).format('DD.MM.YYYY');;
 	
 	return (
 		"<div class='firstTable'>\n\
