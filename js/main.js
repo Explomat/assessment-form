@@ -8,10 +8,10 @@ var fourthTable = require('./templates/tables/fourthTable');
 var fifthTable = require('./templates/tables/fifthTable');
 var sixthTable = require('./templates/tables/sixthTable');
 var seventhTable = require('./templates/tables/seventhTable');
-var eighthTabel = require('./templates/tables/eighthTabel');
+var eighthTable = require('./templates/tables/eighthTable');
 var ninthTable = require('./templates/tables/ninthTable');
 var tenthTable = require('./templates/tables/tenthTable');
-var eleventhTabel = require('./templates/tables/eleventhTabel');
+var eleventhTable = require('./templates/tables/eleventhTable');
 var twelfthTable = require('./templates/tables/twelfthTable');
 var thirteenthTable = require('./templates/tables/thirteenthTable');
 var fourteenthTable = require('./templates/tables/fourteenthTable');
@@ -51,10 +51,10 @@ function createBaseHtml(formId, formTypeId, callBack) {
 				fifthTable(parseData.fifthTable) +
 				sixthTable(parseData.sixthTable) +
 				seventhTable(parseData.seventhTable) +
-				eighthTabel(parseData.eighthTabel) +
+				eighthTable(parseData.eighthTable) +
 				ninthTable(parseData.ninthTable) +
-				tenthTable(parseData.tenthTable) +
-				eleventhTabel(parseData.eleventhTabel) +
+				tenthTable(parseData.tenthTable) + 		 
+				eleventhTable(parseData.eleventhTable) + 
 				twelfthTable(parseData.twelfthTable) +
 				thirteenthTable(parseData.thirteenthTable) +
 				fourteenthTable(parseData.fourteenthTable) +

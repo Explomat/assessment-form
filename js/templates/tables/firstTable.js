@@ -2,8 +2,8 @@ var moment = require('moment');
 
 module.exports = function (firstTable) {
 	firstTable = firstTable || {};
-	var startDate = moment(firstTable.col0_str0).format('DD.MM.YYYY');
-	var finishDate = moment(firstTable.col0_str1).format('DD.MM.YYYY');;
+	var startDate = !firstTable.col0_str0 ? '' : moment(firstTable.col0_str0).format('DD.MM.YYYY');
+	var finishDate = !firstTable.col0_str1 ? '' : moment(firstTable.col0_str1).format('DD.MM.YYYY');;
 	
 	return (
 		"<div class='firstTable'>\n\
