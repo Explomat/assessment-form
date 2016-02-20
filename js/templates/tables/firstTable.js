@@ -7,19 +7,6 @@ module.exports = function (firstTable) {
 	
 	return (
 		"<div class='firstTable'>\n\
-			<table align='center' >\n\
-				<tr>\n\
-					<td style='height: 23px; '>\n\
-						текст\n\
-					</td>\n\
-				</tr>\n\
-				<tr>\n\
-					<td style='height: 23px; '>\n\
-						текст\n\
-					</td>\n\
-				</tr>\n\
-			</table>\n\
-			<br><br>\n\
 			<table border-spacing: 0px;' align='center' class='border_table_date'>\n\
 				<tr>\n\
 					<td style='height: 43px; padding-left:10px;' colspan='3' class='color_head_date'>\n\

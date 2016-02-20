@@ -14,11 +14,12 @@ module.exports = {
         return xmlHttp;
     },
 
-    sendRequest: function(url, callBack, data, isSync, requestType) {
+    sendRequest: function(url, callBack, isCache, data, isSync, requestType) {
 
         var xmlHttp = this.getXmlHttp();
         requestType = requestType || 'GET';
         isSync = isSync || true;
+        url = isCache === false || !isCache ? encodeURI(url + "&r=" + Math.round(Math.random() * 10000)) : encodeURI(url);
 
         xmlHttp.open(requestType, url, isSync);
         xmlHttp.onreadystatechange = function() {
