@@ -1,5 +1,6 @@
 var config = require('./config');
 var userTemplate = require('./templates/userTemplate');
+var errorTemplate = require('./templates/errorTemplate');
 
 var firstTable = require('./templates/tables/firstTable');
 var secondTable = require('./templates/tables/secondTable');
@@ -28,6 +29,11 @@ window.onload = function(){
 	start();
 }
 
+function isAccess(user){
+	user = user || {};
+	return user.access === true;
+}
+
 function createDatePickers() {
 	$('.firstTable__date').each(function(){
 		$(this).datepicker({dateFormat: "dd.mm.yy"});
@@ -35,32 +41,40 @@ function createDatePickers() {
 }
 
 function createBaseHtml(formId, formTypeId, callBack) {
-	ajax.sendRequest(config.url.createPath({action_name: 'getData', form_id: formId, form_type_id: formTypeId}), function (data) {
-		var parseData = null;
-		try { parseData = jsonParse(data); }
+	ajax.sendRequest(config.url.createPath({action_name: 'getData', form_id: formId, form_type_id: formTypeId}), function (_data) {
+		var data = null;
+		var baseHtml = '';
+		var buttonsHtml = '';
+
+		try { data = jsonParse(_data); }
 		catch(e) { 
 			console.log(e); 
 			return;
 		}
 
-		var baseHtml = userTemplate(parseData.user) + 
-				firstTable(parseData.firstTable) + 
-				secondTable(parseData.secondTable) +
-				thirdTable(parseData.thirdTable) +
-				fourthTable(parseData.fourthTable) +
-				fifthTable(parseData.fifthTable) +
-				sixthTable(parseData.sixthTable) +
-				seventhTable(parseData.seventhTable) +
-				eighthTable(parseData.eighthTable) +
-				ninthTable(parseData.ninthTable) +
-				tenthTable(parseData.tenthTable) + 		 
-				eleventhTable(parseData.eleventhTable) + 
-				twelfthTable(parseData.twelfthTable) +
-				thirteenthTable(parseData.thirteenthTable) +
-				fourteenthTable(parseData.fourteenthTable) +
-				fifthteenthTable(parseData.fifthteenthTable);
+		if (!isAccess(data.user)) {
+			baseHtml = errorTemplate();
+		}
+		else {
+			baseHtml = userTemplate(data.user) + 
+				firstTable(data.firstTable) + 
+				secondTable(data.secondTable) +
+				thirdTable(data.thirdTable) +
+				fourthTable(data.fourthTable) +
+				fifthTable(data.fifthTable) +
+				sixthTable(data.sixthTable) +
+				seventhTable(data.seventhTable) +
+				eighthTable(data.eighthTable) +
+				ninthTable(data.ninthTable) +
+				tenthTable(data.tenthTable) + 		 
+				eleventhTable(data.eleventhTable) + 
+				twelfthTable(data.twelfthTable) +
+				thirteenthTable(data.thirteenthTable) +
+				fourteenthTable(data.fourteenthTable) +
+				fifthteenthTable(data.fifthteenthTable);
 
-		var buttonsHtml = buttonsTemplate(parseData.user);
+			buttonsHtml = buttonsTemplate(data.user);
+		}
 
 		document.getElementById('render-forms').innerHTML = baseHtml;
 		document.getElementById('render-buttons').innerHTML = buttonsHtml;
