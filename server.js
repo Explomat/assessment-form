@@ -1,5 +1,61 @@
 <%
 
+
+function _saveHtml(text) {
+	var stream = new ActiveXObject('ADODB.Stream');
+	stream.Type = 2;
+	stream.Mode = 3;
+	stream.Charset = 'UTF-8';
+	stream.Open();
+	stream.Position = 0;
+	stream.WriteText(text);
+	var fileName = curUserID;
+	var defaultPath = 'C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID;
+	if ( FilePathExists(defaultPath) ) {
+		stream.SaveToFile('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName + '.html', 2);
+	} else {
+		CreateDirectory(defaultPath);
+		stream.SaveToFile('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName + '.html', 2);
+	}
+	stream.Close();
+	return newFilePath = 'C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName;
+}
+
+
+function _savePdf(newFilePath) {
+	var oPdf = new ActiveXObject("Websoft.Office.Pdf.Document"); 
+	oPdf.Open(newFilePath + '.html');
+	oPdf.SaveAs(newFilePath +'.pdf', false);
+	return newFilePath;
+}
+
+function _saveDoc(newFilePath) {
+	var oPdf2 = new ActiveXObject("Websoft.Office.Pdf.Document"); 
+	oPdf2.Open(newFilePath + '.pdf');
+	oPdf2.SaveAs(newFilePath +'.doc', true);
+	return newFilePath;
+}
+
+function createPdf(queryObjects) {
+	var filePath = _savePdf(_saveHtml(queryObjects.Body)) + ".pdf";
+	return FileName(filePath);
+}
+
+function getPdf(queryObjects) {
+	var fileName = queryObjects.file_name;
+	var fileData = LoadFileData('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName);
+	Request.RespContentType = 'application/pdf';
+	Request.AddRespHeader("Content-Disposition","attachment; filename=" + fileName);
+	return fileData;
+}
+
+function exportToDoc(queryObjects) {
+	var filePath = _saveDoc(_saveHtml(queryObjects.Body))
+	var fileData = LoadFileData(filePath);
+	Response.WriteBinary(fileData);
+	return 1;
+}
+
 function getData(queryObjects) {
 
 	var formID = queryObjects.form_id;

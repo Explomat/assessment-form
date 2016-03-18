@@ -20,6 +20,7 @@ var fifthteenthTable = require('./templates/tables/fifthteenthTable');
 
 
 var buttonsTemplate = require('./templates/buttonsTemplate');
+var buttonsPreviewTemplate = require('./templates/buttonsPreviewTemplate')
 var ajax = require('./utils/Ajax');
 var utils = require('./utils/utils');
 var jsonParse = require('./utils/jsonParse');
@@ -40,8 +41,17 @@ function createDatePickers() {
 	})
 }
 
+function blockInputs(){
+	$('input, textarea').each(function(){
+		$(this).attr({disabled: true});
+	});
+}
+
 function createBaseHtml(formId, formTypeId, callBack) {
 	ajax.sendRequest(config.url.createPath({action_name: 'getData', form_id: formId, form_type_id: formTypeId}), function (_data) {
+		var isPreview = window.getUrlParams(window.location.href, 'preview');
+		isPreview = isPreview ? jsonParse(isPreview) : false;
+
 		var data = null;
 		var baseHtml = '';
 		var buttonsHtml = '';
@@ -73,18 +83,27 @@ function createBaseHtml(formId, formTypeId, callBack) {
 				fourteenthTable(data.fourteenthTable) +
 				fifthteenthTable(data.fifthteenthTable);
 
-			buttonsHtml = buttonsTemplate(data.user);
+			if (isPreview){
+				buttonsHtml = buttonsPreviewTemplate();
+				document.getElementById('render-preview-buttons').innerHTML = buttonsHtml;
+			}
+			else{
+				buttonsHtml = buttonsTemplate(data.user);
+				document.getElementById('render-buttons').innerHTML = buttonsHtml;
+			}
 		}
-
 		document.getElementById('render-forms').innerHTML = baseHtml;
-		document.getElementById('render-buttons').innerHTML = buttonsHtml;
+		if (isPreview){
+			blockInputs();
+		}
+		
 		if (callBack) callBack();
 	});
 }
 
 function start() {
-	var formTypeId = utils.getUrlParams(window.location.href, 'object_id');
-	var formId = utils.getUrlParams(window.parent.location.href, 'object_id');
+	var formTypeId = utils.getUrlParams(window.location.href, 'object_id') || utils.getUrlParams(window.location.href, 'form_type_id');
+	var formId = utils.getUrlParams(window.parent.location.href, 'object_id') ||  utils.getUrlParams(window.location.href, 'form_id');
 	createBaseHtml(formId, formTypeId, createDatePickers);
 }
 

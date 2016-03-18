@@ -2,7 +2,27 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<style type="text/css">
+		<style id="assessment-form-all-styles">
+			.userTemplate, .firstTable, .secondTable, .thirdTable, .fourthTable, .fifthTable, .sixthTable, .seventhTable, .eighthTable, 
+			.ninthTable, .tenthTable, .eleventhTable, .twelfthTable, .thirteenthTable, .fourteenthTable, .fifthteenthTable {
+				width: 980px;
+				margin-bottom: 50px;
+			}
+
+			.userTemplate > table, .firstTable > table, .secondTable > table, .thirdTable > table, .fourthTable > table, .fifthTable > table, 
+			.sixthTable > table, .seventhTable > table, .eighthTable > table, .ninthTable > table, .tenthTable > table, 
+			.eleventhTable > table, .twelfthTable > table, .thirteenthTable > table, .fourteenthTable > table, .fifthteenthTable > table {
+				width: 100%;
+			}
+
+			.render-buttons {
+				width: 25%;
+				margin: 10px auto 0 auto;
+			}
+
+			.render-buttons > input {
+				margin-bottom: 5px;
+			}
 			.color_head_table {
 				text-align: center;
 				background-color: #FFEBCD;
@@ -46,42 +66,13 @@
 		<script type="text/javascript" src="/assessment_form/build/jquery.min.js"></script>
 		<script type="text/javascript" src="/assessment_form/build/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="/assessment_form/build/bundle.js"></script>
-		<script type="text/javascript">
-			function getUrlParams(url, param){
-				if (!url) return null;
-
-				var vars = {};
-			    url.replace( 
-					/[?&]+([^=&]+)=?([^&]*)?/gi,
-					function( m, key, value ) {
-						vars[key] = value !== undefined ? value : '';
-					}
-			    );
-
-			    if (param) return vars[param];
-			    return vars;
-			}
-
-			function sendForm(status) {
-				$('input[type="checkbox"]').each(function(){
-					var isChecked = $(this).is(':checked');
-					var name = $(this).attr('name');
-					if (!isChecked) {
-						$(this).parent().append('<input type="hidden" name="'+name+'" value="off">');
-					}
-				});
-
-				var form = document.getElementById('actionForm');
-				form.form_id.value = getUrlParams(window.parent.location.href, 'object_id');
-				form.action.value = status;
-				form.submit(); 
-			}
-		</script>
+		<script type="text/javascript" src="/assessment_form/build/utils.js"></script>
 	</head>
 	<body>
 		<FORM id="actionForm" action="/custom_web_template.html?object_id=6251547620930508696&server_id=6251548875239611649&action_name=saveData" 
 		method="post" enctype="multipart/form-data" style="background-color:#fff;">
 			<div id="render-forms"></div>
+			<div id="render-preview-buttons" class="render-buttons"></div>
 			<div id="render-buttons" class="render-buttons"></div>
 
 			<input type="hidden" name="form_id" value="">
