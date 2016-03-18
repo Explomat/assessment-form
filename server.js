@@ -49,11 +49,17 @@ function getPdf(queryObjects) {
 	return fileData;
 }
 
-function exportToDoc(queryObjects) {
-	var filePath = _saveDoc(_saveHtml(queryObjects.Body))
-	var fileData = LoadFileData(filePath);
-	Response.WriteBinary(fileData);
-	return 1;
+function getDoc(queryObjects) {
+	var fileName = queryObjects.file_name;
+	var fileData = LoadFileData('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName);
+	Request.RespContentType = 'application/msword';
+	Request.AddRespHeader("Content-Disposition","attachment; filename=" + fileName);
+	return fileData;
+}
+
+function createDoc(queryObjects) {
+	var filePath = _saveDoc(_saveHtml(queryObjects.Body)) + ".doc";
+	return FileName(filePath);
 }
 
 function getData(queryObjects) {

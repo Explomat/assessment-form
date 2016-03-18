@@ -81,7 +81,16 @@ var files = {
 	},
 
 	saveDoc: function(){
+		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 
+		var markData = document.getElementById('render-forms').innerHTML;
+		var styles = '<style>' + document.getElementById('assessment-form-all-styles').innerHTML + '</style>';
+		Ajax.sendRequest(config.createPath({action_name: 'createDoc'}), function(fileName){ 
+		    var a = document.createElement('a');
+		    a.setAttribute('href', config.createPath({action_name: 'getDoc', file_name: fileName}));
+		    document.body.appendChild(a);
+		    a.click();
+		}, false, styles + markData, true, 'POST');
 	}
 }
 
