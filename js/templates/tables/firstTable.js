@@ -16,14 +16,14 @@ module.exports = function (firstTable) {
 				<tr>\n\
 					<td class='color_head_date' style='width: 35px; height: 43px; padding-left:10px;'>C: </td>\n\
 					<td class='color_head_date' style='width: 225px; height: 43px'>\n\
-						<input readonly class='firstTable__date' name='firstTable.col0_str0' value=" + startDate + ">\n\
+						<input readonly type='text' class='firstTable__date' name='firstTable.col0_str0' value=" + startDate + ">\n\
 					</td>\n\
 					<td class='color_head_date' rowspan='2'></td>\n\
 				</tr>\n\
 				<tr>\n\
 					<td class='color_head_date' style='width: 35px; height: 43px; padding-left:10px;'>ПО: </td>\n\
 					<td class='color_head_date' style='width: 225px; height: 43px'>\n\
-						<input readonly class='firstTable__date' name='firstTable.col0_str1' value=" + finishDate + ">\n\
+						<input readonly type='text' class='firstTable__date' name='firstTable.col0_str1' value=" + finishDate + ">\n\
 					</td>\n\
 				</tr>\n\
 			</table>\n\

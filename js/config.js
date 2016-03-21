@@ -2,7 +2,7 @@ var serverId = '6251548875239611649';
 var routerId = '6251547620930508696';
 var customBaseUrl = '/custom_web_template.html';
 
-module.exports = {
+var config = {
 
 	url: {
 		defaultPath: customBaseUrl.concat('?object_id=').concat(routerId).concat('&server_id='.concat(serverId)),
@@ -31,3 +31,6 @@ module.exports = {
 		process.env.NODE_ENV = 'production';
 	}
 }
+
+window.config = config;
+module.exports = config;

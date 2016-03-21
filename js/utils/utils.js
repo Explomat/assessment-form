@@ -1,4 +1,4 @@
-module.exports = {
+var utils = {
 	
 	strBoolToBool: function (boolStr) {
 		if (boolStr === undefined || boolStr === null) return false;
@@ -20,3 +20,6 @@ module.exports = {
 	    return vars;
 	}
 }
+
+window.utils = utils;
+module.exports = utils;

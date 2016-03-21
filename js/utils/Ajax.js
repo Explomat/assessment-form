@@ -1,6 +1,6 @@
 var AJAX_TIME_OVER = 10000;
 
-module.exports = {
+var Ajax = {
 
     getXmlHttp: function(){
         var xmlHttp;
@@ -46,4 +46,7 @@ module.exports = {
         }
     
     }
-}     
+}
+
+window.Ajax = Ajax;
+module.exports = Ajax;     
