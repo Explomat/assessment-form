@@ -46,11 +46,17 @@ function changeTextAreaHeight(){
 		var textArea = $(this);
 		if (textArea.text() === '') return;
 
-		var div = $('<div/>').text(textArea.text())
+		textArea.scrollTop(textArea.get(0).scrollHeight);
+
+		var scrollHeight = textArea.scrollTop() + textArea.height();
+
+		textArea.scrollTop(0);
+		textArea.height(scrollHeight);
+		/*var div = $('<div/>').text(textArea.text())
 		div.width(textArea.width());
 		$(document.body).append(div);
 		textArea.height(Number(div.height()) + 25);
-		div.remove();
+		div.remove();*/
 	});
 }
 
