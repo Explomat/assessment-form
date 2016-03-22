@@ -1,4 +1,11 @@
 var utils = {
+
+	decodeHtml: function(str) {
+	 	var outStr = str.replace(/&#(\d+);/g, function(match, dec) {
+			return String.fromCharCode(dec);
+		});
+		return outStr;
+	},
 	
 	strBoolToBool: function (boolStr) {
 		if (boolStr === undefined || boolStr === null) return false;

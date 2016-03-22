@@ -49,7 +49,7 @@ function blockInputs(){
 
 function createBaseHtml(formId, formTypeId, callBack) {
 	ajax.sendRequest(config.url.createPath({action_name: 'getData', form_id: formId, form_type_id: formTypeId}), function (_data) {
-		var isPreview = window.getUrlParams(window.location.href, 'preview');
+		var isPreview = utils.getUrlParams(window.location.href, 'preview');
 		isPreview = isPreview ? jsonParse(isPreview) : false;
 
 		var data = null;

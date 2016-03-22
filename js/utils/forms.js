@@ -1,29 +1,41 @@
 var Ajax = require('./Ajax');
-var config = require('./config');
+var config = require('../config');
+var utils = require('./utils');
 
 var forms = {
 
-	savePdf: function(e){
-		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+	showSpinner: function () {
+		$('.overlay-loading').addClass('overlay-loading--show');
+	},
 
-		var markData = document.getElementsByTagName('html').innerHTML;
-		Ajax.sendRequest(config.createPath({action_name: 'createPdf'}), function(fileName){ 
-		    var a = document.createElement('a');
-		    a.setAttribute('href', config.createPath({action_name: 'getPdf', file_name: fileName}));
-		    document.body.appendChild(a);
-		    a.click();
+	removeSpinner: function(){
+		$('.overlay-loading').removeClass('overlay-loading--show');
+	},
+
+	downloadFile: function(actionName, fileName){
+		this.showSpinner();
+		var a = $('<a href=' + config.url.createPath({action_name: actionName, file_name: fileName}) + '></a>'); 
+		$(document.body).append(a);
+	    a[0].click();
+	    this.removeSpinner();
+	},
+
+	savePdf: function(e){
+		var self = this;
+		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+		var markData = document.getElementsByTagName('html')[0].outerHTML;
+
+		Ajax.sendRequest(config.url.createPath({action_name: 'createPdf'}), function(fileName){
+			self.downloadFile('getPdf', fileName);
 		}, false, markData, true, 'POST');
 	},
 
 	saveDoc: function(){
+		var self = this;
 		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-
-		var markData = document.getElementsByTagName('html').innerHTML;
-		Ajax.sendRequest(config.createPath({action_name: 'createDoc'}), function(fileName){ 
-		    var a = document.createElement('a');
-		    a.setAttribute('href', config.createPath({action_name: 'getDoc', file_name: fileName}));
-		    document.body.appendChild(a);
-		    a.click();
+		var markData = document.getElementsByTagName('html')[0].outerHTML;
+		Ajax.sendRequest(config.url.createPath({action_name: 'createDoc'}), function(fileName){
+			self.downloadFile('getDoc', fileName); 
 		}, false, markData, true, 'POST');
 	},
 

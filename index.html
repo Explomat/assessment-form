@@ -50,6 +50,7 @@
 			}
 			textarea { 
 				width: 95%;
+				resize: none;
 			}
 			.color_head_date {
 				background-color: #FFEBCD; border-color: black;
@@ -61,12 +62,38 @@
 			.input_text_center { 
 				text-align:center;
 			}
+
+			.overlay-loading {
+		        display: none;
+				position: fixed;
+			    top: 0;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    background-color: rgba(91,91,91,.26); 
+		    }
+		    .overlay-loading:before {
+		    	content: "";
+	            position: absolute;
+	            background-image: url("build/style/images/loading.gif");
+	            background-position: center center;
+	            background-repeat: no-repeat;
+	            background-size: 100%;
+	            display: block;
+	            width: 32px;
+	            height: 32px;
+	            top: 50%;
+	            left: 50%;
+	            transform: translate(-50%, -50%);
+		    }
+		    .overlay-loading--show {
+	            display: block;
+	        }
 		</style>
 		<link rel="stylesheet" type="text/css" href="/assessment_form/build/style/style.min.css">
 		<script type="text/javascript" src="/assessment_form/build/jquery.min.js"></script>
 		<script type="text/javascript" src="/assessment_form/build/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="/assessment_form/build/bundle.js"></script>
-		<script type="text/javascript" src="/assessment_form/build/utils.js"></script>
 	</head>
 	<body>
 		<FORM id="actionForm" action="/custom_web_template.html?object_id=6251547620930508696&server_id=6251548875239611649&action_name=saveData" 
@@ -78,6 +105,7 @@
 			<input type="hidden" name="form_id" value="">
 			<input type="hidden" name="action" value="">
 		</FORM>
+		<div class="overlay-loading"></div>
 	</body>
 </html>
 
