@@ -4,6 +4,14 @@ var utils = require('./utils');
 
 var forms = {
 
+	hideButtons: function(){
+		$('#render-preview-buttons').css({display: 'none'});
+	},
+
+	showButtons: function(){
+		$('#render-preview-buttons').css({display: 'block'});
+	},
+
 	showSpinner: function () {
 		$('.overlay-loading').addClass('overlay-loading--show');
 	},
@@ -12,19 +20,27 @@ var forms = {
 		$('.overlay-loading').removeClass('overlay-loading--show');
 	},
 
+	print: function(){
+		this.hideButtons();
+		window.print();
+		this.showButtons();
+	},
+
 	downloadFile: function(actionName, fileName){
 		this.showSpinner();
 		var a = $('<a href=' + config.url.createPath({action_name: actionName, file_name: fileName}) + '></a>'); 
 		$(document.body).append(a);
 	    a[0].click();
+	    a.remove();
 	    this.removeSpinner();
 	},
 
 	savePdf: function(e){
 		var self = this;
+		this.hideButtons();
 		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 		var markData = document.getElementsByTagName('html')[0].outerHTML;
-
+		this.showButtons();
 		Ajax.sendRequest(config.url.createPath({action_name: 'createPdf'}), function(fileName){
 			self.downloadFile('getPdf', fileName);
 		}, false, markData, true, 'POST');
@@ -32,8 +48,10 @@ var forms = {
 
 	saveDoc: function(){
 		var self = this;
+		this.hideButtons();
 		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 		var markData = document.getElementsByTagName('html')[0].outerHTML;
+		this.showButtons();
 		Ajax.sendRequest(config.url.createPath({action_name: 'createDoc'}), function(fileName){
 			self.downloadFile('getDoc', fileName); 
 		}, false, markData, true, 'POST');

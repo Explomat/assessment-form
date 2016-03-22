@@ -1,10 +1,13 @@
 var utils = {
 
 	decodeHtml: function(str) {
-	 	var outStr = str.replace(/&#(\d+);/g, function(match, dec) {
+		var textArea = document.createElement('textarea');
+	    textArea.innerHTML = str;
+	 	var outStr = textArea.value.replace(/&#(\d+);/g, function(match, dec) {
 			return String.fromCharCode(dec);
 		});
 		return outStr;
+		
 	},
 	
 	strBoolToBool: function (boolStr) {

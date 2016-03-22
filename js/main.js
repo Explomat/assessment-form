@@ -41,6 +41,19 @@ function createDatePickers() {
 	})
 }
 
+function changeTextAreaHeight(){
+	$('textarea').each(function(){
+		var textArea = $(this);
+		if (textArea.text() === '') return;
+
+		var div = $('<div/>').text(textArea.text())
+		div.width(textArea.width());
+		$(document.body).append(div);
+		textArea.height(Number(div.height()) + 25);
+		div.remove();
+	});
+}
+
 function blockInputs(){
 	$('input, textarea').each(function(){
 		$(this).attr({disabled: true});
@@ -56,7 +69,7 @@ function createBaseHtml(formId, formTypeId, callBack) {
 		var baseHtml = '';
 		var buttonsHtml = '';
 
-		try { data = jsonParse(_data); }
+		try { data = jsonParse(utils.decodeHtml(_data)); }
 		catch(e) { 
 			console.log(e); 
 			return;
@@ -95,6 +108,7 @@ function createBaseHtml(formId, formTypeId, callBack) {
 		document.getElementById('render-forms').innerHTML = baseHtml;
 		if (isPreview){
 			blockInputs();
+			changeTextAreaHeight();
 		}
 		
 		if (callBack) callBack();

@@ -13,10 +13,11 @@ module.exports = function (fifthteenthTable) {
 				</tr>\n\
 				<tr class='color_text_fone_table'>\n\
 					<td style='height: 23px'>\n\
-						<textarea cols='20' name='fifthteenthTable.col0_str0' rows='10'>" + utils.decodeHtml((fifthteenthTable.col0_str0 || '')) + "</textarea>\n\
+						<textarea cols='20' name='fifthteenthTable.col0_str0' rows='10'>" + (fifthteenthTable.col0_str0 || '') + "</textarea>\n\
 					</td>\n\
 				</tr>\n\
 			</table>\n\
+			</div>\n\
 			<table>\n\
 				<tr>\n\
 					<td style='height: 23px; width: 35px;'>\n\
@@ -34,7 +35,6 @@ module.exports = function (fifthteenthTable) {
 						Сотрудник не согласен\n\
 					</td>\n\
 				</tr>\n\
-			</table\n\
-		</div>"
+			</table>"
 	)
 }
