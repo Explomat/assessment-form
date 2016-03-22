@@ -17,7 +17,8 @@ module.exports = function (fifthteenthTable) {
 					</td>\n\
 				</tr>\n\
 			</table>\n\
-			</div>\n\
+		</div>\n\
+		<div>\n\
 			<table>\n\
 				<tr>\n\
 					<td style='height: 23px; width: 35px;'>\n\
@@ -35,6 +36,7 @@ module.exports = function (fifthteenthTable) {
 						Сотрудник не согласен\n\
 					</td>\n\
 				</tr>\n\
-			</table>"
+			</table>\n\
+		</div>"
 	)
 }
