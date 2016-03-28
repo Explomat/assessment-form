@@ -48,7 +48,7 @@ function changeTextAreaHeight(){
 
 		textArea.scrollTop(textArea.get(0).scrollHeight);
 
-		var scrollHeight = textArea.scrollTop() + textArea.height();
+		var scrollHeight = textArea.scrollTop() + textArea.height() + 14; //14 - line-height
 
 		textArea.scrollTop(0);
 		textArea.height(scrollHeight);

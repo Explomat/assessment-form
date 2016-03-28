@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var watch = require('gulp-watch');
+//var watch = require('gulp-watch');
 var browserify = require('gulp-browserify');
 var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
@@ -22,7 +22,7 @@ gulp.task('build-js', function() {
 	        extensions: ['.js']
 	    }))
 	    .pipe(rename('bundle.js'))
-	    //.pipe(gulp.dest('\\\\10.1.21.16\\c$\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\build'))
+	    .pipe(gulp.dest('\\\\10.1.21.16\\c$\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\build'))
 	    .pipe(gulp.dest('./build'))
 });
 

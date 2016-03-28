@@ -27,12 +27,14 @@ var forms = {
 	},
 
 	downloadFile: function(actionName, fileName){
-		this.showSpinner();
-		var a = $('<a href=' + config.url.createPath({action_name: actionName, file_name: fileName}) + '></a>'); 
-		$(document.body).append(a);
-	    a[0].click();
-	    a.remove();
-	    this.removeSpinner();
+		var self = this;
+		//this.showSpinner();
+		var a = document.createElement('a');
+		document.body.appendChild(a);
+		a.setAttribute('href', config.url.createPath({action_name: actionName, file_name: fileName}));
+		a.style.display = 'none';
+		a.click();
+		//this.removeSpinner();
 	},
 
 	savePdf: function(e){
