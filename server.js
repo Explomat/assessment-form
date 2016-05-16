@@ -1,5 +1,5 @@
 <%
-
+var ROOT_DIRECTORY = AppDirectoryPath() + "\\wt\\web\\assessment_form\\files"; // C:\\WebSoft\\WebTutorServer
 
 function _saveHtml(text) {
 	var stream = new ActiveXObject('ADODB.Stream');
@@ -10,29 +10,29 @@ function _saveHtml(text) {
 	stream.Position = 0;
 	stream.WriteText(text);
 	var fileName = curUserID;
-	var defaultPath = 'C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID;
+	var defaultPath = ROOT_DIRECTORY + '\\'+ curUserID;
 	if ( FilePathExists(defaultPath) ) {
-		stream.SaveToFile('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName + '.html', 2);
+		stream.SaveToFile(ROOT_DIRECTORY + '\\'+ curUserID+'\\'+ fileName + '.html', 2);
 	} else {
 		CreateDirectory(defaultPath);
-		stream.SaveToFile('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName + '.html', 2);
+		stream.SaveToFile(ROOT_DIRECTORY + '\\'+ curUserID+'\\'+ fileName + '.html', 2);
 	}
 	stream.Close();
-	return newFilePath = 'C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName;
+	return newFilePath = ROOT_DIRECTORY + '\\'+ curUserID+'\\'+ fileName;
 }
 
 
 function _savePdf(newFilePath) {
-	var oPdf = new ActiveXObject("Websoft.Office.Pdf.Document"); 
-	oPdf.Open(newFilePath + '.html');
-	oPdf.SaveAs(newFilePath +'.pdf', false);
+	var oPdf = new ActiveXObject("HtmlToPdf.Pdf");
+	var newPath = ROOT_DIRECTORY + '\\'+ curUserID+'\\'+ curUserID;
+	oPdf.GeneratePdfFromFile(newPath + '.html', newPath + '.pdf');
 	return newFilePath;
 }
 
 function _saveDoc(newFilePath) {
-	var oPdf2 = new ActiveXObject("Websoft.Office.Pdf.Document"); 
-	oPdf2.Open(newFilePath + '.pdf');
-	oPdf2.SaveAs(newFilePath +'.doc', true);
+	var oDoc = new ActiveXObject("Websoft.Office.Word.Document");
+	oDoc.Open(newFilePath + '.html');
+	oDoc.SaveAs(newFilePath +'.docx');
 	return newFilePath;
 }
 
@@ -41,9 +41,16 @@ function createPdf(queryObjects) {
 	return FileName(filePath);
 }
 
+function createDoc(queryObjects) {
+	var filePath = _saveDoc(_saveHtml(queryObjects.Body)) + ".docx";
+	return FileName(filePath);
+}
+
+// Для кнопок загрузки в PDF и DOC
+
 function getPdf(queryObjects) {
 	var fileName = queryObjects.file_name;
-	var fileData = LoadFileData('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName);
+	var fileData = LoadFileData(ROOT_DIRECTORY + '\\'+ curUserID+'\\'+ fileName);
 	Request.RespContentType = 'application/pdf';
 	Request.AddRespHeader("Content-Disposition","attachment; filename=" + fileName);
 	return fileData;
@@ -51,15 +58,10 @@ function getPdf(queryObjects) {
 
 function getDoc(queryObjects) {
 	var fileName = queryObjects.file_name;
-	var fileData = LoadFileData('C:\\WebSoft\\WebTutorServer\\wt\\web\\assessment_form\\files\\'+ curUserID+'\\'+ fileName);
+	var fileData = LoadFileData(ROOT_DIRECTORY + '\\'+ curUserID+'\\'+ fileName);
 	Request.RespContentType = 'application/msword';
 	Request.AddRespHeader("Content-Disposition","attachment; filename=" + fileName);
 	return fileData;
-}
-
-function createDoc(queryObjects) {
-	var filePath = _saveDoc(_saveHtml(queryObjects.Body)) + ".doc";
-	return FileName(filePath);
 }
 
 function getData(queryObjects) {
@@ -258,7 +260,6 @@ function saveData(queryObjects) {
 	for (elem in prepareData) {
 		if (elem.indexOf('table') != -1 ) {
 			tableName = 'cc_' + elem + 's';
-			alert(tableName)
 			table = ArrayOptFirstElem(XQuery("for $elem in "+tableName+" where $elem/person_id = "+curPersonID+" and $elem/submission_type_id = "+curFormID+" return $elem"));
 			if (table != undefined) {
 				curCard = OpenDoc(UrlFromDocID(table.id))
@@ -276,7 +277,6 @@ function saveData(queryObjects) {
 		}
 	}
 	_doAction(action, curFormID);
-	alert(Request.Header.Referer)
 	Request.AddRespHeader("Refresh", "0; URL="+Request.Header.Referer);
 }
 
