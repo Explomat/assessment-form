@@ -20,7 +20,8 @@ var forms = {
 		$('.overlay-loading').removeClass('overlay-loading--show');
 	},
 
-	print: function(){
+	print: function(event){
+		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 		this.hideButtons();
 		window.print();
 		this.showButtons();
@@ -59,8 +60,8 @@ var forms = {
 		}, false, markData, true, 'POST');
 	},
 
-	requestPreviewForm: function(e){
-		e.preventDefault();
+	requestPreviewForm: function(event){
+		event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 		var formTypeId = utils.getUrlParams(window.location.href, 'object_id');
 		var formId = utils.getUrlParams(window.parent.location.href, 'object_id');
 		window.parent.location.href = "/assessment_form/index.html?preview=1&form_id=" + formId + "&form_type_id=" + formTypeId;

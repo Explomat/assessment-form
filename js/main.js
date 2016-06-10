@@ -61,7 +61,7 @@ function changeTextAreaHeight(){
 }
 
 function blockInputs(){
-	$('input, textarea').each(function(){
+	$('input, textarea, select').each(function(){
 		$(this).attr({disabled: true});
 	});
 }
@@ -85,22 +85,22 @@ function createBaseHtml(formId, formTypeId, callBack) {
 			baseHtml = errorTemplate();
 		}
 		else {
-			baseHtml = userTemplate(data.user) + 
-				firstTable(data.firstTable) + 
-				secondTable(data.secondTable) +
-				thirdTable(data.thirdTable) +
-				fourthTable(data.fourthTable) +
-				fifthTable(data.fifthTable) +
-				sixthTable(data.sixthTable) +
-				seventhTable(data.seventhTable) +
-				eighthTable(data.eighthTable) +
-				ninthTable(data.ninthTable) +
-				tenthTable(data.tenthTable) + 		 
-				eleventhTable(data.eleventhTable) + 
-				twelfthTable(data.twelfthTable) +
-				thirteenthTable(data.thirteenthTable) +
-				fourteenthTable(data.fourteenthTable) +
-				fifthteenthTable(data.fifthteenthTable);
+			baseHtml =  (data.user ? userTemplate(data.user) : '') +
+						(data.firstTable ? firstTable(data.firstTable) : '') + 
+						(data.secondTable ? secondTable(data.secondTable) : '') +
+						(data.thirdTable ? thirdTable(data.thirdTable) : '') +
+						(data.fourthTable ? fourthTable(data.fourthTable) : '') +
+						(data.fifthTable ? fifthTable(data.fifthTable) : '') +
+						(data.sixthTable ? sixthTable(data.sixthTable) : '') +
+						(data.seventhTable ? seventhTable(data.seventhTable) : '') +
+						(data.eighthTable ? eighthTable(data.eighthTable) : '') +
+						(data.ninthTable ? ninthTable(data.ninthTable) : '') +
+						(data.tenthTable ? tenthTable(data.tenthTable) : '') +
+						(data.eleventhTable ? eleventhTable(data.eleventhTable) : '') + 
+						(data.twelfthTable ? twelfthTable(data.twelfthTable) : '') +
+						(data.thirteenthTable ? thirteenthTable(data.thirteenthTable) : '') +
+						(data.fourteenthTable ? fourteenthTable(data.fourteenthTable) : '') +
+						(data.fifthteenthTable ? fifthteenthTable(data.fifthteenthTable) : '');
 
 			if (isPreview){
 				buttonsHtml = buttonsPreviewTemplate();
@@ -112,12 +112,15 @@ function createBaseHtml(formId, formTypeId, callBack) {
 			}
 		}
 		document.getElementById('render-forms').innerHTML = baseHtml;
-		if (isPreview){
-			blockInputs();
-			changeTextAreaHeight();
-		}
+		try {
+			if (isPreview){
+				blockInputs();
+				changeTextAreaHeight();
+			}
+			
+			if (callBack) callBack();
+		}catch(e) { console.log(e); }
 		
-		if (callBack) callBack();
 	});
 }
 

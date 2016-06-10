@@ -7,6 +7,19 @@ module.exports = function (user) {
 	user.formStatus = user.formStatus || '';
 
 	if (utils.strBoolToBool(user.isBoss)) {
+		if (user.formStatus === 'approve'){
+			return (
+				"<input type='button' onclick=window.forms.sendForm('declined') value='Отклонить' class='inputButton'/>\n\
+				<input type='button' onclick=window.forms.sendForm('confirmed') value='Утвердить' class='inputButton'/>\n\
+				<a href='#' onclick=window.forms.requestPreviewForm(event) class='inputButton'>Просмотр формы</a>"
+			);
+		}
+		if (user.formStatus === 'declined') {
+			return (
+				"<input type='button' onclick=window.forms.sendForm('active') value='Активировать форму' class='inputButton' />\n\
+				<a href='#' onclick=window.forms.requestPreviewForm(event) class='inputButton'>Просмотр формы</a>"
+			);
+		}
 		if (user.formStatus === 'declined' || user.formStatus === 'confirmed') {
 			return "<a href='#' onclick=window.forms.requestPreviewForm(event) class='inputButton'>Просмотр формы</a>";
 		}
