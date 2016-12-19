@@ -85,22 +85,22 @@ function createBaseHtml(formId, formTypeId, callBack) {
 			baseHtml = errorTemplate();
 		}
 		else {
-			baseHtml =  (data.user ? userTemplate(data.user) : '') +
-						(data.firstTable ? firstTable(data.firstTable) : '') + 
-						(data.secondTable ? secondTable(data.secondTable) : '') +
-						(data.thirdTable ? thirdTable(data.thirdTable) : '') +
-						(data.fourthTable ? fourthTable(data.fourthTable) : '') +
-						(data.fifthTable ? fifthTable(data.fifthTable) : '') +
-						(data.sixthTable ? sixthTable(data.sixthTable) : '') +
-						(data.seventhTable ? seventhTable(data.seventhTable) : '') +
-						(data.eighthTable ? eighthTable(data.eighthTable) : '') +
-						(data.ninthTable ? ninthTable(data.ninthTable) : '') +
-						(data.tenthTable ? tenthTable(data.tenthTable) : '') +
-						(data.eleventhTable ? eleventhTable(data.eleventhTable) : '') + 
-						(data.twelfthTable ? twelfthTable(data.twelfthTable) : '') +
-						(data.thirteenthTable ? thirteenthTable(data.thirteenthTable) : '') +
-						(data.fourteenthTable ? fourteenthTable(data.fourteenthTable) : '') +
-						(data.fifthteenthTable ? fifthteenthTable(data.fifthteenthTable) : '');
+			baseHtml =  ((data.user === '' || data.user) ? userTemplate(data.user) : '') +
+						((data.firstTable === '' || data.firstTable ) ? firstTable(data.firstTable) : '') + 
+						((data.secondTable === '' || data.secondTable ) ? secondTable(data.secondTable) : '') +
+						((data.thirdTable === '' || data.thirdTable ) ? thirdTable(data.thirdTable) : '') +
+						((data.fourthTable === '' || data.fourthTable ) ? fourthTable(data.fourthTable) : '') +
+						((data.fifthTable === '' || data.fifthTable ) ? fifthTable(data.fifthTable) : '') +
+						((data.sixthTable === '' || data.sixthTable ) ? sixthTable(data.sixthTable) : '') +
+						((data.seventhTable === '' || data.seventhTable ) ? seventhTable(data.seventhTable) : '') +
+						((data.eighthTable === '' || data.eighthTable ) ? eighthTable(data.eighthTable) : '') +
+						((data.ninthTable === '' || data.ninthTable ) ? ninthTable(data.ninthTable) : '') +
+						((data.tenthTable === '' || data.tenthTable ) ? tenthTable(data.tenthTable) : '') +
+						((data.eleventhTable === '' || data.eleventhTable ) ? eleventhTable(data.eleventhTable) : '') + 
+						((data.twelfthTable === '' || data.twelfthTable ) ? twelfthTable(data.twelfthTable) : '') +
+						((data.thirteenthTable === '' || data.thirteenthTable ) ? thirteenthTable(data.thirteenthTable) : '') +
+						((data.fourteenthTable === '' || data.fourteenthTable ) ? fourteenthTable(data.fourteenthTable) : '') +
+						((data.fifthteenthTable === '' || data.fifthteenthTable ) ? fifthteenthTable(data.fifthteenthTable) : '');
 
 			if (isPreview){
 				buttonsHtml = buttonsPreviewTemplate();
